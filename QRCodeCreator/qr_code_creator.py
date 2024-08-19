@@ -3,12 +3,16 @@ import pathlib
 import qrcode
 
 FILE_EXTENSION = ".jpg" # File extension for qr codes
+QR_CODE_FOLDER = "QR-codes" # Folder to store qr codes
+
+if not os.path.exists(QR_CODE_FOLDER):
+    os.makedirs(QR_CODE_FOLDER)
 
 def generate_qr_code(data, file_name):
     """Function to generate qr codes"""
     img = qrcode.make(data)
     type(img)
-    img.save(file_name + FILE_EXTENSION)
+    img.save(f"{QR_CODE_FOLDER}/{file_name}{FILE_EXTENSION}")
 
 created_qr_code_names = [] # List to store names of created qr codes for printing
 def create_qr_codes():
