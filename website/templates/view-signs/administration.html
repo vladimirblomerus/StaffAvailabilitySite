@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <header>
+        <div class="logo-shield-half"></div>
+        <h1><b>NTI</b>GYMNASIET</h1>
+    </header>
+    <main>
+        <section class="normal-data">
+            <h2>Administration</h2>
+            <div>
+                <h3 class="name">{{person.name}}</h3>
+                <p>{{person.phone}}</p>
+                <p>{{person.email}}</p>
+            </div>
+            <div>
+                <h4>Öppettider:</h4>
+                <ol>
+                    {% for hours in person.open_hours %}
+                        <li>{{hours}}</li>
+                    {% endfor %}
+                </ol>
+            </div>
+        </section>
+        <hr />
+        <section class="abnormal-data">
+            <div>
+                <h3>Tillgänglighet:</h3>
+                {% if availability %}
+                    <p>{{availability.message}}</p>
+                    <p>Jag är tillgänglig {{availability.datetime}}</p>
+                {% else %}
+                    <p>Information saknas</p>
+                {% endif %}
+            </div>
+            <div>
+                <h3>Statusmeddelanden:</h3>
+                {% if status_messages %}
+                    <ul>
+                        {% for message in status_messages %}
+                            <li>{{message}}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>Inga statusmeddelanden</p>
+                {% endif %}
+            </div>
+        </section>
+    </main>
+        
+        
+{% endblock %}
