@@ -81,6 +81,10 @@ section {
     justify-content: center;
 }
 
+.abnormal-data div {
+    padding: 0 10%;
+}
+
 .abnormal-data div * {
     margin: 10px 0;
 }

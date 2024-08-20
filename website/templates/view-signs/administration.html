@@ -25,24 +25,12 @@
         <hr />
         <section class="abnormal-data">
             <div>
-                <h3>Tillgänglighet:</h3>
-                {% if availability %}
-                    <p>{{availability.message}}</p>
-                    <p>Jag är tillgänglig {{availability.datetime}}</p>
+                <h3>Senaste nytt:</h3>
+                {% if updates %}
+                    <p>{{updates.message}}</p>
+                    <p>Publicerat: {{updates.published_datetime}}</p>
                 {% else %}
-                    <p>Information saknas</p>
-                {% endif %}
-            </div>
-            <div>
-                <h3>Statusmeddelanden:</h3>
-                {% if status_messages %}
-                    <ul>
-                        {% for message in status_messages %}
-                            <li>{{message}}</li>
-                        {% endfor %}
-                    </ul>
-                {% else %}
-                    <p>Inga statusmeddelanden</p>
+                    <p>Inget nytt just nu</p>
                 {% endif %}
             </div>
         </section>
