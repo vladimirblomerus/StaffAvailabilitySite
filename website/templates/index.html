@@ -3,4 +3,10 @@
 {% block content %}
     <h1>Hem</h1>
     <p>Välkommen till sidan för personalstatus på NTI</p>
+    <p>Vi är stolt verktyget för:</p>
+    {% if count_moderators > 1 %}
+        <p>{{count_moderators}} personalmedlemmar</p>
+    {% else %}
+        <p>{{count_moderators}} personalmedlem</p>
+    {% endif %}
 {% endblock %}
