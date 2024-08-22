@@ -15,6 +15,10 @@ textarea {
     resize: none;
 }
 
+.prewrap {
+    white-space: pre-wrap;
+}
+
 .content {
     width: 100%;
     min-height: 100vh;
@@ -99,12 +103,20 @@ section {
     padding: 0 10%;
 }
 
+.abnormal-data hr {
+   filter: opacity(0.5);
+}
+
 .abnormal-data p, .abnormal-data textarea {
     text-align: left;
 }
 
 .abnormal-data div h3, .abnormal-data div p {
     margin: 10px 0;
+}
+
+.abnormal-data .update-published {
+    font-size: 0.9em;
 }
 
 .abnormal-data form textarea, .abnormal-data form button {
@@ -129,4 +141,20 @@ section {
     top: 10%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+@media screen and (min-width: 600px) {
+    html, body {
+        font-size: 20px;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    html, body {
+        font-size: 24px;
+    }
+
+    .abnormal-data p, .abnormal-data textarea {
+        text-align: center;
+    }
 }

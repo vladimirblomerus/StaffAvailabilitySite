@@ -3,8 +3,9 @@
 {% block abnormal_data %}
     <h3>Senaste nytt:</h3>
     {% if updates %}
-        <p>{{updates.message}}</p>
-        <p>Publicerat: {{updates.published_datetime}}</p>
+        <p class="prewrap">{{updates.message}}</p>
+        <hr />
+        <p class="update-published">Publicerat: {{updates.published_datetime}}</p>
     {% else %}
         <p>Inget nytt just nu</p>
     {% endif %}
