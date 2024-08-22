@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <header>
+        <div class="logo-shield-half"></div>
+        <h1><b>NTI</b>GYMNASIET</h1>
+    </header>
+    <main>
+        <section class="normal-data">
+            <h2>{{room_name}}</h2>
+            <div>
+                <h3 class="name">{{person.name}}</h3>
+                <p>{{person.phone}}</p>
+                <p>{{person.email}}</p>
+            </div>
+            <div>
+                <h4>Öppettider:</h4>
+                <ol>
+                    {% for hours in person.open_hours %}
+                        <li>{{hours}}</li>
+                    {% endfor %}
+                </ol>
+            </div>
+        </section>
+        <hr />
+        <section class="abnormal-data">
+            <div>
+                {% block abnormal_data %}{% endblock %}
+            </div>
+        </section>
+    </main>
+        
+        
+{% endblock %}

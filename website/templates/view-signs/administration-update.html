@@ -1,0 +1,28 @@
+{% extends "view-signs/administration-base.html" %}
+
+{% block abnormal_data %}
+    <h3>Senaste nytt:</h3>
+    <form action="{{url_for('administration_update_submit')}}" method="post">
+        <textarea id="updates-message-textbox" name="message" rows="2" cols="30" placeholder="Upptagen/borta? När är du tillgänglig igen?">{{updates.message if updates else ""}}</textarea>
+        <p>Publicerat: [datum och tid för publicering]</p>
+        <button type="submit">Publicera</button>
+    </form>
+    <!--
+        <p>{{updates.message}}</p>
+        <p>Publicerat: {{updates.published_datetime}}</p>
+    -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var textarea = document.getElementById("updates-message-textbox");
+            function resizeTextarea() {
+                textarea.style.height = "auto"; // Reset the height
+                textarea.style.height = textarea.scrollHeight + "px"; // Set the height to the scroll height
+
+                textarea.style.width = "100%";
+            }
+            resizeTextarea(); // Adjust the height on page load
+
+            textarea.addEventListener("input", resizeTextarea); // Adjust the height on input
+        });
+    </script>
+{% endblock %}

@@ -5,6 +5,16 @@
     font-family: Helvetica, Arial, sans-serif;
 }
 
+html, body {
+    height: 100%;
+    overflow: auto;
+}
+
+textarea {
+    padding: 0.25em;
+    resize: none;
+}
+
 .content {
     width: 100%;
     min-height: 100vh;
@@ -81,12 +91,37 @@ section {
     justify-content: center;
 }
 
+.abnormal-data * {
+    width: 100%;
+}
+
 .abnormal-data div {
     padding: 0 10%;
 }
 
-.abnormal-data div * {
+.abnormal-data p, .abnormal-data textarea {
+    text-align: left;
+}
+
+.abnormal-data div h3, .abnormal-data div p {
     margin: 10px 0;
+}
+
+.abnormal-data form textarea, .abnormal-data form button {
+    margin: 10px 0;
+}
+
+.abnormal-data form p {
+    margin: 0;
+}
+
+.abnormal-data form button {
+    padding: 10px;
+    background-color: #f8a100;
+    color: #111;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .error {

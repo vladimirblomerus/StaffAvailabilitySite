@@ -1,40 +1,11 @@
-{% extends "base.html" %}
+{% extends "view-signs/administration-base.html" %}
 
-{% block content %}
-    <header>
-        <div class="logo-shield-half"></div>
-        <h1><b>NTI</b>GYMNASIET</h1>
-    </header>
-    <main>
-        <section class="normal-data">
-            <h2>Administration</h2>
-            <div>
-                <h3 class="name">{{person.name}}</h3>
-                <p>{{person.phone}}</p>
-                <p>{{person.email}}</p>
-            </div>
-            <div>
-                <h4>Öppettider:</h4>
-                <ol>
-                    {% for hours in person.open_hours %}
-                        <li>{{hours}}</li>
-                    {% endfor %}
-                </ol>
-            </div>
-        </section>
-        <hr />
-        <section class="abnormal-data">
-            <div>
-                <h3>Senaste nytt:</h3>
-                {% if updates %}
-                    <p>{{updates.message}}</p>
-                    <p>Publicerat: {{updates.published_datetime}}</p>
-                {% else %}
-                    <p>Inget nytt just nu</p>
-                {% endif %}
-            </div>
-        </section>
-    </main>
-        
-        
+{% block abnormal_data %}
+    <h3>Senaste nytt:</h3>
+    {% if updates %}
+        <p>{{updates.message}}</p>
+        <p>Publicerat: {{updates.published_datetime}}</p>
+    {% else %}
+        <p>Inget nytt just nu</p>
+    {% endif %}
 {% endblock %}
