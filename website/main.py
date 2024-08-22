@@ -120,6 +120,9 @@ def get_administration_data():
     
     updates = get_latest_log_by_user_id(person["id"])
 
+    if updates is None:
+        return person_dto, None
+
     updates_dto = {
         "message": updates["content"],
         "published_datetime": updates["date_created"],
