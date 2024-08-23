@@ -1,13 +1,19 @@
 from flask import Flask, render_template, redirect, url_for, request
 import pymysql
 import pymysql.cursors
+from datetime import datetime, timedelta, MINYEAR
 
 LOCALHOST = "127.0.0.1"
 USER = "root"
 DATABASE = "schoolinfo"
 
+USER_FETCH_INTERVAL = timedelta(minutes=10) # To lighten the load on the database, as the users don't change that often
 
-users: list[object] = []
+
+users = {
+    "user_list": [],
+    "last_updated": datetime(MINYEAR, 1, 1) # Force an update on the first request
+}
 
 app = Flask(__name__)
 
@@ -29,8 +35,10 @@ def disconnect(connection):
         print(f"Error when disconnecting from database: {e}")
 
 def get_users():
-    global users
-    # Select all users from the database
+    # Fetch all users from the database if the global users variable is outdated
+    if users["last_updated"] > datetime.now() - USER_FETCH_INTERVAL:
+        return
+    
     try:
         connection = connect()
         with connection.cursor() as cursor:
@@ -41,25 +49,19 @@ def get_users():
             # TODO: Replace this with a proper logging mechanism
             print(f"selected users: {result}")
 
-            users = result
+            users["user_list"] = result
+            users["last_updated"] = datetime.now()
     finally:
         disconnect(connection)
 
 def get_user_by_profession(profession):
-    # Select a user by profession from the database
-    try:
-        connection = connect()
-        with connection.cursor() as cursor:
-            sql = "SELECT * FROM `tblusers` WHERE `profession` = %s"
-            cursor.execute(sql, (profession))
-            result = cursor.fetchone()
+    # Select a user by profession from the global users variable
+    get_users()
+    user = next(user for user in users["user_list"] if user["profession"] == profession)
 
-            # TODO: Replace this with a proper logging mechanism
-            print(f"selected user with profession {profession}: {result}")
-
-            return result
-    finally:
-        disconnect(connection)
+    # TODO: Replace this with a proper logging mechanism
+    print(f"selected user with profession {profession}: {user}")
+    return user
 
 def get_latest_log_by_user_id(user_id):
     # Select the last log by user ID from the database
@@ -99,7 +101,7 @@ def post_log(user_id, content):
 
 def count_users_with_role_id(role_id):
     # Count users with a specific role ID using the global users variable
-    return sum(1 for user in users if user["role_id"] == role_id)
+    return sum(1 for user in users["user_list"] if user["role_id"] == role_id)
 
 @app.route("/")
 def home():
