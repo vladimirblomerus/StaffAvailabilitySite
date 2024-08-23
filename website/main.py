@@ -85,6 +85,15 @@ def post_log(user_id, content):
             sql = "INSERT INTO `tbllogs` (`user_id`, `content`) VALUES (%s, %s)"
             cursor.execute(sql, (user_id, content))
             connection.commit()
+
+            # TODO: Replace this with a proper logging mechanism
+            print(f"added log with user ID {user_id} and content {content}")
+
+            return {"type": "success", "message": "Uppdateringen har skickats."}
+    except Exception as e:
+        # TODO: Replace this with a proper logging mechanism
+        print(f"Error when adding log: {e}")
+        return {"type": "error", "message": "Något gick fel när uppdateringen skulle skickas."}
     finally:
         disconnect(connection)
 
@@ -130,28 +139,33 @@ def get_administration_data():
 
     return person_dto, updates_dto
 
-@app.route("/administration")
-def administration():
+@app.route("/administration/")
+def administration(toast=None):
     room_name = "Administration"
     person_dto, updates_dto = get_administration_data()
-    
-    return render_template("/view-signs/administration.html", page_title="Administration", room_name=room_name, person=person_dto, updates=updates_dto)
+    if toast is not None:
+        print(toast)
+    return render_template("/view-signs/administration.html", page_title="Administration", room_name=room_name, person=person_dto, updates=updates_dto, toast=toast)
 
-@app.route("/administration/update", methods=["GET", "POST"])
-def administration_update():
+
+@app.route("/administration/update/", methods=["GET"])
+def administration_update(toast=None):
     # TODO: Check if the user is logged in and has the correct role
     room_name = "Administration"
     person_dto, updates_dto = get_administration_data()
-    
-    return render_template("/view-signs/administration-update.html", page_title="Administration - Uppdatera", room_name=room_name, person=person_dto, updates=updates_dto)
+    if toast is not None:
+        print(toast)
+    return render_template("/view-signs/administration-update.html", page_title="Administration - Uppdatera", room_name=room_name, person=person_dto, updates=updates_dto, toast=toast)
 
-@app.route("/administration/update/submit", methods=["POST"])
+@app.route("/administration/update/submit/", methods=["POST"])
 def administration_update_submit():
     # TODO: Check if the user is logged in and has the correct role
     message = request.form["message"]
     if len(message) > 2:
-        post_log(3, message) # TODO: Replace 3 with the user ID of the logged in user
-    return redirect(url_for("administration_update"))
+        post_toast = post_log(3, message) # TODO: Replace 3 with the user ID of the logged in user
+    else:
+        post_toast = {"type": "error", "message": "Meddelandet måste innehålla minst 3 tecken."}
+    return administration_update(toast=post_toast)
 
 # Catch-all route for non-existing pages
 @app.route("/<path:path>")

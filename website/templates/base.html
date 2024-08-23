@@ -8,6 +8,15 @@
 </head>
 <body>
     <div class="content">
+        {% if toast %}
+            <div class="toast">
+                <p>{{toast.message}}</p>
+            </div>
+        {% endif %}
+        <header>
+            <div class="logo-shield-half"></div>
+            <h1><b>NTI</b>GYMNASIET</h1>
+        </header>
         {% block content %}{% endblock %}
     </div>
 </body>
