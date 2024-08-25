@@ -16,11 +16,23 @@ html, body {
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 0.5em;
-    background-color: #f8a100;
+    background-color: #00c0e2;
     color: #111;
     border-radius: 5px;
     z-index: 100;
-    animation: fadeOut 1s ease-out 3s forwards;
+    animation: fadeOut 1s ease-out 7s forwards;
+}
+
+.toast.success {
+    background-color: #00c52e;
+}
+
+.toast.error {
+    background-color: #ad0113;
+}
+
+.toast.warning {
+    background-color: #ffa600;
 }
 
 @keyframes fadeOut {
@@ -78,17 +90,26 @@ main {
     color: #eee;
 }
 
+h2 {
+    font-size: 1.5em;
+}
+
 hr {
+    width: 100%;
     border: 0;
     border-top: 2px solid #eee;
     margin: 10px 0;
 }
 
-section {
+.sign-content, .normal-data, .abnormal-data {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+}
+
+.normal-data, .abnormal-data {
+    width: 100%;
 }
 
 .normal-data {
@@ -96,15 +117,11 @@ section {
     justify-content: space-around;
 }
 
-.normal-data * {
+#room-name, .normal-data * {
     margin: 10px 0;
 }
 
-.normal-data h2 {
-    font-size: 1.5em;
-}
-
-.normal-data .name {
+.normal-data #name {
     font-size: 1.75em;
 }
 
@@ -125,24 +142,29 @@ section {
     padding: 0 10%;
 }
 
-.abnormal-data hr {
-   filter: opacity(0.5);
-}
-
 .abnormal-data p, .abnormal-data textarea {
     text-align: left;
 }
 
-.abnormal-data div h3, .abnormal-data div p {
-    margin: 10px 0;
+.abnormal-data div h3 {
+    margin: 0.6em 0;
+}
+
+.abnormal-data div p {
+    padding: 0.4em 0;
 }
 
 .abnormal-data .update-published {
+    border-top: #eee 2px solid;
     font-size: 0.9em;
 }
 
+.abnormal-data form .update-published {
+    border-top: none;
+}
+
 .abnormal-data form textarea, .abnormal-data form button {
-    margin: 10px 0;
+    margin: 5px 0;
 }
 
 .abnormal-data form textarea {
@@ -184,4 +206,19 @@ section {
     .abnormal-data p, .abnormal-data textarea {
         text-align: center;
     }
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    white-space: nowrap;
+    clip-path: inset(100%);
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+    outline: 0;
+    outline-offset: 0;
 }

@@ -1,16 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <main>
+    <main class="sign-content" aria-labelledby="room-name">
+        <h2 id="room-name">{{room_name}}</h2>
         <section class="normal-data">
-            <h2>{{room_name}}</h2>
-            <div>
-                <h3 class="name">{{person.name}}</h3>
-                <p>{{person.phone}}</p>
-                <p>{{person.email}}</p>
+            <div aria-labelledby="name">
+                <h3 id="name">{{person.name}}</h3>
+                <p><span class="visually-hidden">Telefonnummer:</span>{{person.phone}}</p>
+                <p><span class="visually-hidden">Epostaddress:</span>{{person.email}}</p>
             </div>
             <div>
-                <ol>
+                <h3 class="visually-hidden" id="open-hours">Öppettider</h3>
+                <ol aria-labelledby="open-hours">
                     {% for hours in person.open_hours %}
                         <li>{{hours}}</li>
                     {% endfor %}
@@ -18,7 +19,7 @@
             </div>
         </section>
         <hr />
-        <section class="abnormal-data">
+        <section class="abnormal-data" aria-labelledby="latest-news-heading">
             <div>
                 {% block abnormal_data %}{% endblock %}
             </div>

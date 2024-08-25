@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv-SE">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +9,12 @@
 <body>
     <div class="content">
         {% if toast %}
-            <div class="toast">
+            <div class="toast {{toast.type}}" role="alert" aria-live="{% if toast.type == 'error' or toast.type == 'warning' %}assertive{% elif toast.type == 'success' %}polite{% endif %}" aria-label="{{toast.type}} message">
                 <p>{{toast.message}}</p>
             </div>
         {% endif %}
         <header>
-            <div class="logo-shield-half"></div>
+            <div class="logo-shield-half" role="presentation"></div>
             <h1><b>NTI</b>GYMNASIET</h1>
         </header>
         {% block content %}{% endblock %}

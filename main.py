@@ -151,23 +151,27 @@ def administration(toast=None):
 
 
 @app.route("/administration/update/", methods=["GET"])
-def administration_update(toast=None):
+def administration_update(toast=None, prefilled_message=""):
     # TODO: Check if the user is logged in and has the correct role
     room_name = "Administration"
     person_dto, updates_dto = get_administration_data()
     if toast is not None:
         print(toast)
+    if prefilled_message != "":
+        updates_dto["message"] = prefilled_message
+        updates_dto["published_datetime"] = datetime(MINYEAR, 1, 1) # Because the message is not published yet, and we don't want to show the old date
     return render_template("/view-signs/administration-update.html", page_title="Administration - Uppdatera", room_name=room_name, person=person_dto, updates=updates_dto, toast=toast)
 
 @app.route("/administration/update/submit/", methods=["POST"])
 def administration_update_submit():
     # TODO: Check if the user is logged in and has the correct role
     message = request.form["message"]
-    if len(message) > 2:
+    if len(message) > 4:
         post_toast = post_log(3, message) # TODO: Replace 3 with the user ID of the logged in user
+        return administration_update(toast=post_toast)
     else:
-        post_toast = {"type": "error", "message": "Meddelandet måste innehålla minst 3 tecken."}
-    return administration_update(toast=post_toast)
+        post_toast = {"type": "error", "message": "Meddelandet måste innehålla minst 5 tecken."}
+        return administration_update(toast=post_toast, prefilled_message=message)
 
 # Catch-all route for non-existing pages
 @app.route("/<path:path>")
