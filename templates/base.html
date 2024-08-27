@@ -7,17 +7,21 @@
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
 </head>
 <body>
-    <div class="content">
-        {% if toast %}
-            <div class="toast {{toast.type}}" role="alert" aria-live="{% if toast.type == 'error' or toast.type == 'warning' %}assertive{% elif toast.type == 'success' %}polite{% endif %}" aria-label="{{toast.type}} message">
-                <p>{{toast.message}}</p>
-            </div>
-        {% endif %}
-        <header>
-            <div class="logo-shield-half" role="presentation"></div>
-            <h1><b>NTI</b>GYMNASIET</h1>
-        </header>
-        {% block content %}{% endblock %}
-    </div>
+    {% if toast %}
+        <div class="toast {{toast.type}}" role="alert" aria-live="{% if toast.type == 'error' or toast.type == 'warning' %}assertive{% elif toast.type == 'success' %}polite{% endif %}" aria-label="{{toast.type}} message">
+            <p>{{toast.message}}</p>
+        </div>
+    {% endif %}
+    <header>
+        <div class="logo-shield-half" role="presentation"></div>
+        <a href="{{url_for('home')}}" aria-label="Gå till startsidan"><h1><b>NTI</b>GYMNASIET</h1></a>
+    </header>
+    {% block content %}{% endblock %}
+    {% block footer %}
+        <footer>
+            <p>Utvecklat för TE4 på NTI Örebro</p>
+            <p>&copy; 2024 Vladimir Blomerus</p>
+        </footer>
+    {% endblock %}
 </body>
 </html>

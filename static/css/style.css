@@ -7,7 +7,16 @@
 
 html, body {
     height: 100%;
+    width: 100%;
     overflow: auto;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: #eee;
 }
 
 .toast {
@@ -53,20 +62,12 @@ textarea {
     white-space: pre-wrap;
 }
 
-.content {
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
 header {
     flex-grow: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #111;
-    color: #eee;
     padding: 10px 0;
 }
 
@@ -79,6 +80,15 @@ header {
     margin-right: -0.5em;
 }
 
+header a {
+    color: inherit;
+    text-decoration: none;
+}
+
+header a:hover, header a:focus {
+    text-decoration: underline;
+}
+
 h1 {
     font-size: 1.5em;
     font-weight: 400;
@@ -87,7 +97,6 @@ h1 {
 main {
     flex-grow: 1;
     background-color: rgb(46, 27, 46);
-    color: #eee;
 }
 
 h2 {
@@ -101,6 +110,7 @@ hr {
     margin: 10px 0;
 }
 
+/* Sign content */
 .sign-content, .normal-data, .abnormal-data {
     display: flex;
     flex-direction: column;
@@ -113,12 +123,12 @@ hr {
 }
 
 .normal-data {
-    min-height: 50%;
+    min-height: 45%;
     justify-content: space-around;
 }
 
 #room-name, .normal-data * {
-    margin: 10px 0;
+    margin: 5px 0;
 }
 
 .normal-data #name {
@@ -185,11 +195,117 @@ hr {
     cursor: pointer;
 }
 
+@media screen and (min-width: 1000px) {
+    .abnormal-data p, .abnormal-data textarea {
+        text-align: center;
+    }
+}
+
+/* Error page */
 .error {
     position: absolute;
     top: 10%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+/* index.html */
+.home-content .banner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 7em;
+    background-color: #000;
+}
+
+.home-content figure {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.home-content figure img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.home-content .banner div {
+    z-index: 2;
+    background-color: hsla(0, 0%, 0%, 0.7);
+    padding: 1.5em;
+}
+
+.home-content .banner h2 {
+    font-size: 3em;
+}
+
+.home-content .information-section {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: 1fr;
+    border-top: #eee 3px solid;
+}
+
+.home-content .information-section > * {
+    height: 100%;
+}
+
+@media screen and (min-width: 480px) {
+    .home-content .information-section {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.home-content .information-section article {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1em;
+}
+
+.home-content .information-section ol {
+    padding-left: 2em;
+}
+
+.home-content .information-section li {
+    margin: 0.5em 0;
+}
+
+.home-content .information-section div {
+    margin: 2em auto;
+    width: fit-content;
+}
+
+.home-content .information-section a {
+    display: block;
+    color: #01b9fe;
+    font-size: 1em;
+    padding: 0.25em;
+}
+
+/* general */
+footer {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #111;
+    padding: 1em;
+    gap: 1em;
+}
+
+p, li, textarea {
+    line-height: 1.3em;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 @media screen and (min-width: 600px) {
@@ -201,10 +317,6 @@ hr {
 @media screen and (min-width: 1000px) {
     html, body {
         font-size: 1.4rem;
-    }
-
-    .abnormal-data p, .abnormal-data textarea {
-        text-align: center;
     }
 }
 

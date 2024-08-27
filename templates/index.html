@@ -1,12 +1,43 @@
-{% extends "base.html" %}
+</li>{% extends "base.html" %}
 
 {% block content %}
-    <h1>Hem</h1>
-    <p>Välkommen till sidan för personalstatus på NTI</p>
-    <p>Vi är stolt verktyget för:</p>
-    {% if count_moderators > 1 %}
-        <p>{{count_moderators}} personalmedlemmar</p>
-    {% else %}
-        <p>{{count_moderators}} personalmedlem</p>
-    {% endif %}
+<main class="home-content">
+    <section class="banner">
+        <figure>
+            <img src="{{url_for('static', filename='images/600-våning-2-blicka-på-rum-20240827_143757.jpg')}}"
+                alt="Korridor med rum på skolan" srcset="
+                    {{url_for('static', filename='images/320-våning-2-blicka-på-rum-20240827_143757.jpg')}} 320w,
+                    {{url_for('static', filename='images/600-våning-2-blicka-på-rum-20240827_143757.jpg')}} 600w,
+                    {{url_for('static', filename='images/1000-våning-2-blicka-på-rum-20240827_143757.jpg')}} 1000w,
+                    {{url_for('static', filename='images/1920-våning-2-blicka-på-rum-20240827_143757.jpg')}} 1920w,
+                ">
+        </figure>
+        <div>
+            <h2>Skolinfo</h2>
+            <p>Få information om tillgängligheten av personal och salar med en skanning.</p>
+        </div>
+    </section>
+    <section class="information-section">
+        <article>
+            <h3 id="how-to-use-title">Hur man använder systemet:</h3>
+            <ol aria-labelledby="how-to-use-title">
+                <li>Gå till rummet som du vill ha information om.</li>
+                <li>Lokalisera QR-koden bredvid dörren.</li>
+                <li>Öppna kameraappen eller en QR-kodläsare på din smartphone och rikta kameran mot QR-koden.</li>
+                <li>En notifikation kommer att visas på din skärm. Klicka på notifikationen för att komma till sidan för
+                    rummet.</li>
+            </ol>
+        </article>
+        <nav>
+            <div>
+                <h3 id="links-to-rooms-title">Länkar till rum:</h3>
+                <ul aria-labelledby="links-to-rooms-title">
+                    <li><a href="{{url_for('administration')}}">Administrationen</a></li>
+                    <li><a href="/" aria-label="">Vaktmästeriet</a></li>
+                    <li><a href="/">Elevhälsan</a></li>
+                </ul>
+            </div>
+        </nav>
+    </section>
+</main>
 {% endblock %}
