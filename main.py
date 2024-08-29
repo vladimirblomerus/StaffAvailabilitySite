@@ -105,8 +105,7 @@ def count_users_with_role_id(role_id):
 
 @app.route("/")
 def home():
-    get_users()
-    return render_template("index.html", page_title="Home", count_moderators=count_users_with_role_id(2))
+    return render_template("index.html", page_title="Home")
 
 @app.route("/error", defaults={"message": "404 - Sidan hittades inte."})
 def error(message):
